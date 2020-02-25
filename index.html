@@ -98,7 +98,6 @@
         if (option && typeof option === "object") {
             myChart.setOption(option, true);
             myChart.on('click', function (params) {
-                console.log(params);
                 var data = params['data'];
                 layer.open({
                     type: 1,
@@ -118,16 +117,20 @@
             table += '<tr><th width="30%">学校名称</th><th width="50%">调剂专业</th><th width="20%">学校类型</th></tr>';
             table += '</thead>';
             table += '<tbody>';
-            var items = data.items;
-            if (typeof(data) == 'undefined' && typeof(items) == 'undefined') {
+            if (typeof (data) == 'undefined') {
                 table += '<tr><td colspan="4">暂无调剂信息</td></tr>'
             } else {
-                for(var i = 0; i < items.length; i ++) {
-                    table += '<tr>';
-                    table += '<td>' + items[i].name + '</td>';
-                    table += '<td>' + items[i].title + '</td>';
-                    table += '<td>' + items[i].type + '</td>';
-                    table += '</tr>'
+                var items = data.items;
+                if (typeof (items) == 'undefined') {
+                    table += '<tr><td colspan="4">暂无调剂信息</td></tr>'
+                } else {
+                    for (var i = 0; i < items.length; i++) {
+                        table += '<tr>';
+                        table += '<td>' + items[i].name + '</td>';
+                        table += '<td>' + items[i].title + '</td>';
+                        table += '<td>' + items[i].type + '</td>';
+                        table += '</tr>'
+                    }
                 }
             }
             table += '</tbody>';
